@@ -2,8 +2,8 @@ var gameWrapper = document.querySelector('.gameWrapper');
 var field = document.querySelector('#container');
 var buttonWrapper = document.querySelector('.buttonWrapper');
 var capacityWrap = document.querySelector('.capacityWrap');
-var particle;//хранит последний перетянутый элемент
-var tank; //поле смешивания элементов
+var particle; // хранит последний перетянутый элемент
+var tank; // поле смешивания элементов
 var number;
 var elementComponents = {
   stone: ['fire', 'fire'],
@@ -123,18 +123,31 @@ var elementComponents = {
   tasmanian_devil: ['rat', 'bag'],
 }
 
+var keys = Object.keys(elementComponents);
+var particleX;
+var particleY;
+field.addEventListener('dragover', function(event) {
+  event.preventDefault();
+});
+
+field.addEventListener('drop', function(event) {
+  field.append(particle);
+  particle.style.position = 'absolute';
+  particle.style.top = event.pageY - particleY + 'px';
+  particle.style.left = event.pageX - particleX + 'px';
+  particle.style.display = 'flex';
+});
 class Element {
   constructor(container, elemName) {
     this._container = container;
     this._elemName = elemName;
     this._run(container, elemName);
-  }  
+  }
   _run(container, elemName) {
     var elem = document.createElement('div');
     container.appendChild(elem);
     elem.draggable = true;
     elem.innerHTML = elemName;
-    //elem.style.backgroundImage = 'url(image/'+elemName+'.png)';
     elem.classList.add(elemName, 'element');
     elem.addEventListener('dragstart', function(event) {
       particle = this;
@@ -172,13 +185,16 @@ class Element {
     }, false);
   }
 }
+function getTouchPos(touchEvent) {
+  if (touchEvent.touches) {
+    if (touchEvent.touches.length > 0) {
+      var touch = touchEvent.touches[0]; // Получаем первое касание
+      return { x: touch.clientX, y: touch.clientY };
+    }
+  }
+  return { x: 0, y: 0 };
+}
 
-var keys = Object.keys(elementComponents);
-var particleX;
-var particleY;
-field.addEventListener('dragover', function(event){
-      event.preventDefault();
-});
 
 field.addEventListener('drop', function(event) {
   field.append(particle);  
