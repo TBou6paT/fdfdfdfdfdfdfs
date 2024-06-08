@@ -1,192 +1,199 @@
-/* Основные стили */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+.elementsPosition {
+display: flex;
+flex-wrap: wrap;
 }
 
-/* Контейнер для всей игры */
-#container {
-  width: 100%;
-  max-width: 567px;
-  height: 991px;
-  background-color: rgb(23, 33, 43);
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto;
+{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
 }
-
-/* Обертка для кнопок */
-.buttonWrapperContainer {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.gameWrapper {
+display: flex;
+width: 100%;
+margin: 10px 0;
+height: 520px;
 }
-
-/* Размещение кнопок */
+@media screen and (max-width: 720px) and (min-width: 480px) {
+.gameWrapper {
+height: 450px;
+}
 .buttonWrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex-wrap: wrap;
-  padding: 10px;
+flex-direction: column;
 }
-
-/* Классы для элементов */
+}
+@media screen and (max-width: 480px) {
+.gameWrapper {
+height: 300px;
+}
+.buttonWrapper {
+flex-direction: column;
+}
+}
+.buttonWrapperContainer {
+width: 13%;
+height: 100%;
+}
+.buttonWrapper {
+display: flex;
+flex-wrap: wrap;
+padding-top: 30px;
+}
+@media (width: 576px) and (width: 991px) {
+#container {
+display: flex;
+flex-wrap: wrap;
+width: 100%; /* Изменено на 100%, чтобы использовать всю доступную ширину /
+padding: 20px;
+height: auto; / Изменено на auto, чтобы высота контейнера адаптировалась к содержимому /
+background: url(image/game_background.jpg); / Убедитесь, что путь к изображению корректен /
+background-size: cover; / Добавлено для корректного отображения фона */
+}
+}
+.capacityWrap {
+display: flex;
+flex-direction: column;
+justify-content: space-around;
+width: 25%;
+height: 99%;
+margin: 1% 1% 0;
+}
+.capacity {
+width: 90%;
+height: 48%;
+padding: 1%;
+margin: 3% auto;
+background: url(image/pot.jpg);
+background-size: 100%;
+text-align: center;
+font-size: 20px;
+color: yellowgreen;
+}
+.deleteArea {
+text-align: center;
+width: 95%;
+height: 30%;
+padding: 15px 5px;
+margin: 0 auto;
+background-color: #1f1a1a;
+font-size: 20px;
+color: blanchedalmond;
+border: solid 5px #363333;
+border-radius: 5px;
+}
+.create {
+border: #000000 solid 2px;
+background-color: #808080;
+font-size: 17px;
+width: 44%;
+height: 30px;
+margin: 0 0 15px 4%;
+font-weight: bold;
+border-radius: 3px;
+}
 .element {
-  width: 55px;
-  height: 55px;
-  margin: 5px;
-  border: #000000 solid 2px;
-  background-color: #808080;
-  font-size: 23px;
-  font-weight: bold;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 5px;
-  color: #242424;
-  background-size: 100%;
+width: 55px;
+height: 55px;
+margin-right: 5.5px;
+border: #000000 solid 2px;
+background-color: #808080;
+font-size: 23px;
+font-weight: bold;
+margin: 5px;
+display: flex;
+position: relative;
+justify-content: center;
+align-items: center;
+border-radius: 5px;
+color: #242424;
+background-size: 100%;
 }
 .element:hover {
-  cursor: pointer;
+cursor: pointer;
 }
-
-/* Адаптивные стили для элементов */
+@media screen and (max-width: 850px) and (min-width: 480px) {
+.element {
+width: 40px;
+height: 40px;
+margin-right: 4px;
+font-size: 19px;
+font-weight: bold;
+}
+.create {
+width: 80%;
+height: 25px;
+font-size: 16px;
+font-weight: bold;
+}
+}
 @media screen and (max-width: 480px) {
-  .element {
-    width: 40px;
-    height: 40px;
-    font-size: 16px;
-  }
+.element {
+width: 30px;
+height: 30px;
+margin-right: 3px;
+font-size: 16px;
+font-weight: bold;
 }
-
-/* Классы для .capacity и .deleteArea */
-.capacity {
-  width: 90%;
-  height: 48%;
-  padding: 1%;
-  margin: 3% auto;
-  background: url(image/pot.jpg);
-  background-size: 100%;
-  text-align: center;
-  font-size: 20px;
-  color: yellowgreen;
-  position: absolute;
-  right: 0;
+.create {
+width: 90%;
+height: 20px;
+font-size: 14px;
+font-weight: bold;
 }
-
-.deleteArea {
-  text-align: center;
-  width: 95%;
-  height: 30%;
-  padding: 15px 5px;
-  margin: 0 auto;
-  background-color: #1f1a1a;
-  font-size: 20px;
-  color: blanchedalmond;
-  border: solid 5px #363333;
-  border-radius: 5px;
-  position: absolute;
-  right: 0;
 }
-
-/* Обертка для элементов */
-.elementsPosition {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 100%;
-  padding: 20px;
-}
-
-/* Адаптивные стили для мобильных устройств */
-@media screen and (max-width: 720px) and (min-width: 480px) {
-  .gameWrapper {
-    height: 450px;
-  }
-  .buttonWrapper {
-    flex-direction: column;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .gameWrapper {
-    height: 300px;
-  }
-  .buttonWrapper {
-    flex-direction: column;
-  }
-}
-
-@media screen and (min-width: 576px) and (max-width: 991px) {
-  #container {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    padding: 20px;
-    height: auto;
-    background: url(image/game_background.jpg);
-    background-size: cover;
-  }
-}
-
-/* Стили для элементов огня, воды и т.д. */
 .fire {
-  border: #ff0000 solid 2px;
-  background-color: #f7aa46;
-  background-image: url(image/fire.png);
+border: #ff0000 solid 2px;
+background-color: #f7aa46;
+background-image: url(image/fire.png);
 }
 .water {
-  border: #0000ff solid 2px;
-  background-color: #9b9bda;
-  background-image: url(image/water.png);
+border: #0000ff solid 2px;
+background-color: #9b9bda;
+background-image: url(image/water.png);
 }
 .air {
-  border: #cec3b5 solid 2px;
-  background-color: #d0dbdb;
+border: #cec3b5 solid 2px;
+background-color: #d0dbdb;
 }
 .soil {
-  border: #a52a2a solid 2px;
-  background-color: #4b0a0a;
+border: #a52a2a solid 2px;
+background-color: #4b0a0a;
 }
 .rock {
-  border: #808080 solid 2px;
-  background-color: #cec8c8;
+border: #808080 solid 2px;
+background-color: #cec8c8;
 }
 .steam {
-  border: #61a4db solid 2px;
-  background-color: #fcfcfc;
+border: #61a4db solid 2px;
+background-color: #fcfcfc;
 }
 .mud {
-  border: #5f5c5c solid 2px;
-  background-color: #742626;
+border: #5f5c5c solid 2px;
+background-color: #742626;
 }
 .sand {
-  border: #808080 solid 2px;
-  background-color: #ffff00;
+border: #808080 solid 2px;
+background-color: #ffff00;
 }
 .dust {
-  border: #5e5b5b solid 2px;
-  background-color: #918a8a;
+border: #5e5b5b solid 2px;
+background-color: #918a8a;
 }
 .fog {
-  border: #aadadb solid 2px;
-  background-color: #dbd2d2;
+border: #aadadb solid 2px;
+background-color: #dbd2d2;
 }
 .wind {
-  border: #94d6dd solid 2px;
-  background-color: #d3c7c7;
+border: #94d6dd solid 2px;
+background-color: #d3c7c7;
 }
 .restoreButton {
-  width: 150px;
-  height: 40px;
-  font-size: 16px;
-  color: whitesmoke;
-  background-color: #e66739;
-  border: solid 3px #9e4404;
-  border-radius: 3px;
+width: 150px;
+height: 40px;
+font-size: 16px;
+color: whitesmoke;
+background-color: #e66739;
+border: solid 3px #9e4404;
+border-radius: 3px;
 }
 
