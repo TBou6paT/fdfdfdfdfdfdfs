@@ -122,6 +122,9 @@ var elementComponents = {
   thrush: ['bird', 'cat'],
   tasmanian_devil: ['rat', 'bag'],
 }
+
+
+
 var keys = Object.keys(elementComponents);
 var particleX;
 var particleY;
@@ -346,4 +349,39 @@ function deleteExcessButtons(){
 
 var restoreButton = document.querySelector('.restoreButton');
 restoreButton.addEventListener('click', restoreProgress);
+
+// Функция для получения координат касания
+function getTouchPos(touchEvent) {
+  if (touchEvent.touches) {
+    if (touchEvent.touches.length > 0) {
+      var touch = touchEvent.touches[0]; // Получаем первое касание
+      return { x: touch.clientX, y: touch.clientY };
+    }
+  }
+  return { x: 0, y: 0 };
+}
+
+// Добавляем обработчики событий касания для элемента
+elem.addEventListener('touchstart', function(event) {
+  var touchPos = getTouchPos(event);
+  particleX = touchPos.x - elem.getBoundingClientRect().left;
+  particleY = touchPos.y - elem.getBoundingClientRect().top;
+  particle = this;
+  event.preventDefault(); // Предотвращаем стандартное поведение
+}, false);
+
+elem.addEventListener('touchmove', function(event) {
+  var touchPos = getTouchPos(event);
+  // Перемещаем элемент в новую позицию
+  elem.style.position = 'absolute';
+  elem.style.left = touchPos.x - particleX + 'px';
+  elem.style.top = touchPos.y - particleY + 'px';
+  event.preventDefault(); // Предотвращаем скроллинг
+}, false);
+
+elem.addEventListener('touchend', function(event) {
+  // Обработка завершения перетаскивания
+  elem.style.position = 'static';
+  event.preventDefault();
+}, false);
 
