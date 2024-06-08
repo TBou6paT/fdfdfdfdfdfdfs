@@ -1,3 +1,23 @@
+body {
+  background-color: #FFA773; /* Цвет фона #FFA773 */
+}
+
+/* Применяем стили для элементов в диапазоне от 576px до 991px */
+@media (min-width: 576px) and (max-width: 991px) {
+  .elementsPosition {
+    display: flex;
+    flex-wrap: wrap;
+    /* Остальные стили для .elementsPosition */
+  }
+
+  /* Остальные стили для элементов */
+}
+
+/* Пример стиля для #container с ограничением размеров фона */
+#container {
+  /* Остальные стили для #container */
+  background-size: 567px 991px; /* Ограничение размеров фонового изображения */
+}
 .elementsPosition {
   display: flex;
   flex-wrap: wrap;
@@ -38,17 +58,7 @@
   flex-wrap: wrap;
   padding-top: 30px;
 }
-@media (min-width: 576px) and (max-width: 991px) {
-  #container {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%; /* Изменено на 100%, чтобы использовать всю доступную ширину */
-    padding: 20px;
-    height: auto; /* Изменено на auto, чтобы высота контейнера адаптировалась к содержимому */
-    background: url('path/to/your/image/game_background.jpg'); /* Убедитесь, что путь к изображению корректен */
-    background-size: cover; /* Добавлено для корректного отображения фона */
-  }
-}
+
 .capacityWrap {
   display: flex;
   flex-direction: column;
@@ -195,3 +205,4 @@
   border: solid 3px #9e4404;
   border-radius: 3px;
 }
+
