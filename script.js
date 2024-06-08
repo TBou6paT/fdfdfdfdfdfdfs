@@ -360,28 +360,49 @@ function getTouchPos(touchEvent) {
   }
   return { x: 0, y: 0 };
 }
+const draggableElement = document.getElementById('draggableElement');
+  
+  let offsetX, offsetY;
 
-// Добавляем обработчики событий касания для элемента
-elem.addEventListener('touchstart', function(event) {
-  var touchPos = getTouchPos(event);
-  particleX = touchPos.x - elem.getBoundingClientRect().left;
-  particleY = touchPos.y - elem.getBoundingClientRect().top;
-  particle = this;
-  event.preventDefault(); // Предотвращаем стандартное поведение
-}, false);
+  draggableElement.addEventListener('mousedown', startDrag);
+  draggableElement.addEventListener('touchstart', startDrag);
 
-elem.addEventListener('touchmove', function(event) {
-  var touchPos = getTouchPos(event);
-  // Перемещаем элемент в новую позицию
-  elem.style.position = 'absolute';
-  elem.style.left = touchPos.x - particleX + 'px';
-  elem.style.top = touchPos.y - particleY + 'px';
-  event.preventDefault(); // Предотвращаем скроллинг
-}, false);
+  function startDrag(event) {
+    event.preventDefault();
+  
+    if (event.type === 'touchstart') {
+      offsetX = event.touches[0].clientX - draggableElement.getBoundingClientRect().left;
+      offsetY = event.touches[0].clientY - draggableElement.getBoundingClientRect().top;
+    } else {
+      offsetX = event.clientX - draggableElement.getBoundingClientRect().left;
+      offsetY = event.clientY - draggableElement.getBoundingClientRect().top;
+    }
 
-elem.addEventListener('touchend', function(event) {
-  // Обработка завершения перетаскивания
-  elem.style.position = 'static';
-  event.preventDefault();
-}, false);
+    document.addEventListener('mousemove', onDrag);
+    document.addEventListener('touchmove', onDrag);
+    document.addEventListener('mouseup', stopDrag);
+    document.addEventListener('touchend', stopDrag);
+  }
 
+  function onDrag(event) {
+    event.preventDefault();
+  
+    let clientX, clientY;
+    if (event.type === 'touchmove') {
+      clientX = event.touches[0].clientX;
+      clientY = event.touches[0].clientY;
+    } else {
+      clientX = event.clientX;
+      clientY = event.clientY;
+    }
+
+    draggableElement.style.left = clientX - offsetX + 'px';
+    draggableElement.style.top = clientY - offsetY + 'px';
+  }
+
+  function stopDrag() {
+    document.removeEventListener('mousemove', onDrag);
+    document.removeEventListener('touchmove', onDrag);
+    document.removeEventListener('mouseup', stopDrag);
+    document.removeEventListener('touchend', stopDrag);
+  }
