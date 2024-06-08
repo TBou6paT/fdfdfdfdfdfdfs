@@ -7,36 +7,42 @@
 
 /* Контейнер для всей игры */
 #container {
-  width: 567px;
+  width: 100%;
+  max-width: 567px;
   height: 991px;
   background-color: rgb(23, 33, 43);
   display: flex;
   flex-direction: column;
+  margin: 0 auto;
 }
 
 /* Обертка для кнопок */
 .buttonWrapperContainer {
-  width: 13%;
+  width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* Размещение кнопок */
 .buttonWrapper {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   flex-wrap: wrap;
-  padding-top: 30px;
+  padding: 10px;
 }
 
 /* Классы для элементов */
 .element {
   width: 55px;
   height: 55px;
-  margin-right: 5.5px;
+  margin: 5px;
   border: #000000 solid 2px;
   background-color: #808080;
   font-size: 23px;
   font-weight: bold;
-  margin: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -46,6 +52,15 @@
 }
 .element:hover {
   cursor: pointer;
+}
+
+/* Адаптивные стили для элементов */
+@media screen and (max-width: 480px) {
+  .element {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
 }
 
 /* Классы для .capacity и .deleteArea */
@@ -81,11 +96,13 @@
 /* Обертка для элементов */
 .elementsPosition {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding: 20px;
 }
 
-/* Адаптивные стили */
+/* Адаптивные стили для мобильных устройств */
 @media screen and (max-width: 720px) and (min-width: 480px) {
   .gameWrapper {
     height: 450px;
@@ -113,34 +130,6 @@
     height: auto;
     background: url(image/game_background.jpg);
     background-size: cover;
-  }
-}
-
-@media screen and (max-width: 850px) and (min-width: 480px) {
-  .element {
-    width: 40px;
-    height: 40px;
-    margin-right: 4px;
-    font-size: 19px;
-  }
-  .create {
-    width: 80%;
-    height: 25px;
-    font-size: 16px;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .element {
-    width: 30px;
-    height: 30px;
-    margin-right: 3px;
-    font-size: 16px;
-  }
-  .create {
-    width: 90%;
-    height: 20px;
-    font-size: 14px;
   }
 }
 
