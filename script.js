@@ -123,7 +123,55 @@ var elementComponents = {
   tasmanian_devil: ['rat', 'bag'],
 }
 
+class Element {
+  constructor(container, elemName) {
+    this._container = container;
+    this._elemName = elemName;
+    this._run(container, elemName);
+  }  
+  _run(container, elemName) {
+    var elem = document.createElement('div');
+    container.appendChild(elem);
+    elem.draggable = true;
+    elem.innerHTML = elemName;
+    //elem.style.backgroundImage = 'url(image/'+elemName+'.png)';
+    elem.classList.add(elemName, 'element');
+    elem.addEventListener('dragstart', function(event) {
+      particle = this;
+      particleX = event.offsetX;
+      particleY = event.offsetY;
+    });
+    elem.addEventListener('drag', function() {
+      elem.style.position = 'static';
+      elem.style.display = 'none';
+    });
+    elem.addEventListener('dragend', function() {
+      elem.style.display = 'flex';
+    });
 
+    // Добавляем обработчики событий касания
+    elem.addEventListener('touchstart', function(event) {
+      var touchPos = getTouchPos(event);
+      particleX = touchPos.x - elem.getBoundingClientRect().left;
+      particleY = touchPos.y - elem.getBoundingClientRect().top;
+      particle = this;
+      event.preventDefault();
+    }, false);
+
+    elem.addEventListener('touchmove', function(event) {
+      var touchPos = getTouchPos(event);
+      elem.style.position = 'absolute';
+      elem.style.left = touchPos.x - particleX + 'px';
+      elem.style.top = touchPos.y - particleY + 'px';
+      event.preventDefault();
+    }, false);
+
+    elem.addEventListener('touchend', function(event) {
+      elem.style.position = 'static';
+      event.preventDefault();
+    }, false);
+  }
+}
 
 var keys = Object.keys(elementComponents);
 var particleX;
